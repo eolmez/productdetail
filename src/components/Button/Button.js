@@ -8,10 +8,9 @@ const Button = ({
   isLast,
   colorSelector,
   sizeSelector,
-  handleClick,
+  redirectionClick,
   isSelected,
 }) => {
-  console.log("url", url);
   const isDisabled =
     (colorSelector === "siyah" && (item === "M" || item === "XL")) ||
     ((sizeSelector === "m" || sizeSelector === "xl") && item === "Siyah");
@@ -28,7 +27,7 @@ const Button = ({
         "flex justify-center items-center border-2 border-black px-2 mx-1 w-20 lg:w-28 h-12 rounded"
       }`}
       onClick={() => {
-        handleClick(url);
+        redirectionClick(url);
         if (tableTitle !== "Toptan Fiyat" && handler) {
           handler(item);
         }

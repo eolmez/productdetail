@@ -5,7 +5,7 @@ import Price from "../Price";
 import VariantTable from "../VariantTable";
 import CalculationTable from "../CalculationTable";
 
-const ProductDetails = ({ data }) => {
+const ProductDetails = ({ data, selectedVariant }) => {
   const variantMap = {
     tableButton:
       "flex justify-center items-center border-2 border-gray px-2 mx-1 w-20 lg:w-28 h-12 rounded disabled:bg-gray-100 disabled:text-gray-500 disabled:border-gray-200 disabled:shadow-none",
@@ -21,7 +21,11 @@ const ProductDetails = ({ data }) => {
       <Title titleText={data.productTitle} />
       <Comments />
       <Price data={data} />
-      <VariantTable data={data} variantMap={variantMap} />
+      <VariantTable
+        data={data}
+        variantMap={variantMap}
+        selectedVariant={selectedVariant}
+      />
       <CalculationTable data={data} variantMap={variantMap} />
     </div>
   );

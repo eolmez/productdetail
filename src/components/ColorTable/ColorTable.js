@@ -1,6 +1,12 @@
 import DataTable from "../DataTable";
 
-const ColorTable = ({ data, variant, setColorSelector, sizeSelector }) => {
+const ColorTable = ({
+  data,
+  variant,
+  setColorSelector,
+  sizeSelector,
+  selectedAttributes,
+}) => {
   const colorValues =
     data.selectableAttributes.find((attribute) => attribute.name === "Renk")
       ?.values || [];
@@ -16,6 +22,7 @@ const ColorTable = ({ data, variant, setColorSelector, sizeSelector }) => {
         variant={variant}
         handler={handleColorChange}
         sizeSelector={sizeSelector}
+        selectedAttributes={selectedAttributes}
       />
     </>
   );

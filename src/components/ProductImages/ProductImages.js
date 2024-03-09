@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Thumbnails from "../Thumnails";
+import Thumbnails from "../Thumbnails";
 import { useState } from "react";
 
 const ProductImages = ({ images }) => {

@@ -1,6 +1,6 @@
 import Button from "../Button";
 import InputArea from "../InputArea";
-import { usePathname, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const DataTable = ({
   tableTitle,
@@ -15,13 +15,10 @@ const DataTable = ({
   errorMessage,
   handleInputChange,
   totalPrice,
+  selectedAttributes,
 }) => {
-  const pathName = usePathname();
   const params = useParams();
   const getUrl = (item) => {
-    // if (params.color) {
-    //   return `/${params.color}/${item}`;
-    // }
     if (tableTitle === "Renk") {
       return `/${item}/${params?.size}`;
     }
@@ -30,14 +27,12 @@ const DataTable = ({
     }
     return `/${item}`;
   };
-  const handleClick = (url) => {
-    // setSelectedValue(x);
-    // console.log("buraya tıkladın", );
+  const redirectionClick = (url) => {
     window.location.href = url;
   };
   return (
     <div className="flex justify-start items-center ml-3">
-      <div className="">
+      <div>
         <p
           className={`flex justify-between text-sm w-28 ${
             isTotal && "font-semibold text-lg"
@@ -76,12 +71,9 @@ const DataTable = ({
                 isLast={index === data.length - 1}
                 colorSelector={colorSelector}
                 sizeSelector={sizeSelector}
-                handleClick={handleClick}
+                redirectionClick={redirectionClick}
                 isSelected={
-                  typeof item === "string" &&
-                  (params?.color.toLowerCase().indexOf(item.toLowerCase()) >
-                    -1 ||
-                    params?.size.toLowerCase().indexOf(item.toLowerCase()) > -1)
+                  typeof item === "string" && selectedAttributes.includes(item)
                 }
               />
             ))
