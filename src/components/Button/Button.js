@@ -1,8 +1,7 @@
-import { useState } from "react";
-
 const Button = ({
   tableTitle,
   item,
+  url,
   variant,
   handler,
   quantity,
@@ -10,39 +9,26 @@ const Button = ({
   colorSelector,
   sizeSelector,
   handleClick,
+  isSelected,
 }) => {
-  console.log(item);
+  console.log("url", url);
   const isDisabled =
-    (colorSelector === "Siyah" && (item === "M" || item === "XL")) ||
-    ((sizeSelector === "M" || sizeSelector === "XL") && item === "Siyah");
+    (colorSelector === "siyah" && (item === "M" || item === "XL")) ||
+    ((sizeSelector === "m" || sizeSelector === "xl") && item === "Siyah");
 
   const buttonClass = `${variant} ${
     quantity >= item?.minimumQuantity && quantity <= item?.maximumQuantity
       ? "bg-yellow-200"
       : ""
   } ${isLast ? (tableTitle === "Toptan Fiyat" ? "border-none" : "") : ""}`;
-
   return (
     <button
-      className={buttonClass}
+      className={`${buttonClass} ${
+        isSelected &&
+        "flex justify-center items-center border-2 border-black px-2 mx-1 w-20 lg:w-28 h-12 rounded"
+      }`}
       onClick={() => {
-        // const urlParams = new URLSearchParams(window.location.search);
-        // const selectedColor =
-        //   tableTitle === "Renk" ? item : urlParams.get("renk");
-        // const selectedSize =
-        //   tableTitle === "Beden" ? item : urlParams.get("beden");
-
-        // if (selectedColor && selectedSize) {
-        //   urlParams.set("renk", tableTitle === "Renk" ? item : selectedColor);
-        //   urlParams.set("beden", tableTitle === "Beden" ? item : selectedSize);
-        // } else {
-        //   urlParams.set(tableTitle === "Renk" ? "renk" : "beden", item);
-        // }
-
-        // const newUrl = `${window.location.pathname}/${selectedColor}-${selectedSize}`;
-
-        // window.history.pushState({}, "", newUrl);
-        handleClick(item);
+        handleClick(url);
         if (tableTitle !== "Toptan Fiyat" && handler) {
           handler(item);
         }

@@ -1,12 +1,15 @@
+"use client";
 import Image from "next/image";
 import Thumbnails from "../Thumnails";
+import { useState } from "react";
 
-const ProductImages = ({ imageSelector, defaultImage, setDefaultImage }) => {
+const ProductImages = ({ images }) => {
+  const [selectedImage, setSelectedImage] = useState(images[0]);
   return (
     <div className="flex flex-col justify-center">
       <div className="flex justify-center">
         <Image
-          src={defaultImage}
+          src={selectedImage}
           alt=""
           className="aspect-square object-cover rounded-xl"
           width={"400"}
@@ -14,10 +17,7 @@ const ProductImages = ({ imageSelector, defaultImage, setDefaultImage }) => {
           priority={true}
         />
       </div>
-      <Thumbnails
-        imageSelector={imageSelector}
-        setDefaultImage={setDefaultImage}
-      />
+      <Thumbnails images={images} setSelectedImage={setSelectedImage} />
     </div>
   );
 };

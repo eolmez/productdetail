@@ -1,8 +1,8 @@
-import React, { useState } from "react";
 import Button from "../Button";
 import InputArea from "../InputArea";
+import { usePathname, useParams } from "next/navigation";
 
-const Table = ({
+const DataTable = ({
   tableTitle,
   data,
   variant,
@@ -16,12 +16,25 @@ const Table = ({
   handleInputChange,
   totalPrice,
 }) => {
-  const [selectedValue, setSelectedValue] = useState("");
-  const handleClick = (x) => {
-    setSelectedValue(x);
-    console.log("buraya tıkladın", x);
+  const pathName = usePathname();
+  const params = useParams();
+  const getUrl = (item) => {
+    // if (params.color) {
+    //   return `/${params.color}/${item}`;
+    // }
+    if (tableTitle === "Renk") {
+      return `/${item}/${params?.size}`;
+    }
+    if (tableTitle === "Beden") {
+      return `/${params?.color}/${item}`;
+    }
+    return `/${item}`;
   };
-  console.log(selectedValue);
+  const handleClick = (url) => {
+    // setSelectedValue(x);
+    // console.log("buraya tıkladın", );
+    window.location.href = url;
+  };
   return (
     <div className="flex justify-start items-center ml-3">
       <div className="">
@@ -53,6 +66,10 @@ const Table = ({
                 key={index}
                 tableTitle={tableTitle}
                 item={item}
+                url={
+                  typeof item === "string" &&
+                  getUrl(`${item.toLowerCase()}-${tableTitle?.toLowerCase()}`)
+                }
                 variant={variant}
                 handler={handler}
                 quantity={quantity}
@@ -60,6 +77,12 @@ const Table = ({
                 colorSelector={colorSelector}
                 sizeSelector={sizeSelector}
                 handleClick={handleClick}
+                isSelected={
+                  typeof item === "string" &&
+                  (params?.color.toLowerCase().indexOf(item.toLowerCase()) >
+                    -1 ||
+                    params?.size.toLowerCase().indexOf(item.toLowerCase()) > -1)
+                }
               />
             ))
           )
@@ -75,4 +98,4 @@ const Table = ({
   );
 };
 
-export default Table;
+export default DataTable;

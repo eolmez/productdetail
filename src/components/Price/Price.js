@@ -1,6 +1,19 @@
 import React from "react";
 
-const Price = ({ minimumQuantity }) => {
+const Price = ({ data }) => {
+  const findMinimumQuantity = (baremList) => {
+    let minQuantity = Infinity;
+
+    for (const item of baremList) {
+      if (item.minimumQuantity < minQuantity) {
+        minQuantity = item.minimumQuantity;
+      }
+    }
+
+    return minQuantity;
+  };
+
+  const minimumQuantity = findMinimumQuantity(data.baremList);
   return (
     <>
       <p className="tex-lg md:text-3xl font-semibold text-black ml-3 mt-6">

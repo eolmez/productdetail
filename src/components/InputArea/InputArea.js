@@ -4,7 +4,8 @@ const InputArea = ({ variant, errorMessage, handleInputChange }) => {
       <div className="flex items-center">
         <input
           className={`${variant} ${
-            errorMessage && "invalid:border-pink-500 invalid:text-pink-600 "
+            errorMessage &&
+            "focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500"
           }`}
           type="number"
           inputMode="none"
