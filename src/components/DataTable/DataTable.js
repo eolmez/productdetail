@@ -20,7 +20,7 @@ const DataTable = ({
   const newUrl = (item) => {
     const urlParams = {
       Renk: params?.size ? `/${item}/${params?.size}` : `/${item}`,
-      Beden: params?.color ? `/${item}` : `/${item}/${params?.color}`,
+      Beden: `/${currentColor}-renk/${item}`,
     };
     return urlParams[tableTitle];
   };

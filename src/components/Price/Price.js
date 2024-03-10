@@ -5,15 +5,15 @@ const Price = ({ data }) => {
     let minQuantity = Infinity;
 
     for (const item of baremList) {
-      if (item.minimumQuantity < minQuantity) {
-        minQuantity = item.minimumQuantity;
+      if (item?.minimumQuantity < minQuantity) {
+        minQuantity = item?.minimumQuantity;
       }
     }
 
     return minQuantity;
   };
 
-  const minimumQuantity = findMinimumQuantity(data.baremList);
+  const minimumQuantity = findMinimumQuantity(data?.baremList);
   return (
     <>
       <p className="tex-lg md:text-3xl font-semibold text-black ml-3 mt-6">

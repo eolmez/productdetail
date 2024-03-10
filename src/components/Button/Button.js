@@ -20,6 +20,9 @@ const Button = ({
       ? "bg-yellow-200"
       : ""
   } ${isLast ? (tableTitle === "Toptan Fiyat" ? "border-none" : "") : ""}`;
+
+  const isWholesale = tableTitle === "Toptan Fiyat";
+
   return (
     <button
       className={`${buttonClass} ${
@@ -29,9 +32,7 @@ const Button = ({
       onClick={() => {
         redirectionClick(url);
       }}
-      disabled={
-        isDisabled || tableTitle === "Toptan Fiyat" || basketButtonDisabled
-      }
+      disabled={isDisabled || isWholesale || basketButtonDisabled}
     >
       {tableTitle !== "Toptan Fiyat"
         ? `${item}`

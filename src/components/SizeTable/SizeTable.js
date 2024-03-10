@@ -3,7 +3,7 @@ import DataTable from "../DataTable";
 
 const SizeTable = ({ data, variant, currentColor, selectedAttributes }) => {
   const sizeValues =
-    data.selectableAttributes.find((attribute) => attribute.name === "Beden")
+    data?.selectableAttributes.find((attribute) => attribute?.name === "Beden")
       ?.values || [];
 
   return (

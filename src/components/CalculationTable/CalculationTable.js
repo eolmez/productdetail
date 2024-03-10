@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import BaremTable from "../BaremTable";
 import AmountTable from "../AmountTable";
 import ShippingInfo from "../ShippingInfo";
-import TotalPrice from "../TotalPrice/TotalPrice";
+import TotalPrice from "../TotalPrice";
 import AddBasket from "../AddBasket";
 import variantMap from "@/style/variantMap";
 
@@ -19,7 +19,6 @@ const CalculationTable = ({ data, selectedVariantId }) => {
         return { price, usedBarem: barem };
       }
     }
-
     return null;
   };
 
@@ -50,19 +49,19 @@ const CalculationTable = ({ data, selectedVariantId }) => {
     <>
       <div className="flex flex-col justify-center bg-gray-100 md:w-[495px]">
         <BaremTable
-          data={data.baremList}
-          variant={variantMap.quantityButton}
+          data={data?.baremList}
+          variant={variantMap?.quantityButton}
           quantity={quantity}
         />
         <AmountTable
-          variant={variantMap.inputButton}
+          variant={variantMap?.inputButton}
           setQuantity={setQuantity}
         />
       </div>
       <TotalPrice totalPrice={totalPrice} />
       <ShippingInfo />
       <AddBasket
-        variant={variantMap.basketButton}
+        variant={variantMap?.basketButton}
         basketInfo={basketInfo}
         basketButtonDisabled={basketButtonDisabled}
       />

@@ -4,27 +4,27 @@ import SizeTable from "../SizeTable";
 import variantMap from "@/style/variantMap";
 
 const VariantTable = ({ data, selectedVariant }) => {
-  const selectedAttributes = selectedVariant.attributes.map(
-    (attribute) => attribute.value
+  const selectedAttributes = selectedVariant?.attributes?.map(
+    (attribute) => attribute?.value
   );
-  const currentColor = selectedVariant.attributes
+  const currentColor = selectedVariant?.attributes
     .find((attr) => attr.name === "Renk")
     .value.toLowerCase();
-  const currentSize = selectedVariant.attributes
+  const currentSize = selectedVariant?.attributes
     .find((attr) => attr.name === "Beden")
     .value.toLowerCase();
   return (
     <>
       <ColorTable
         data={data}
-        variant={variantMap.tableButton}
-        currentSize={currentSize} //Değişken ismi selectedSize
+        variant={variantMap?.tableButton}
+        currentSize={currentSize}
         selectedAttributes={selectedAttributes}
       />
       <SizeTable
         data={data}
-        variant={variantMap.tableButton}
-        currentColor={currentColor} //Değişken ismi selectedColor
+        variant={variantMap?.tableButton}
+        currentColor={currentColor}
         selectedAttributes={selectedAttributes}
       />
     </>
