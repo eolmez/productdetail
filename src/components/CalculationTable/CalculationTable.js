@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import DataTable from "../DataTable";
 import BaremTable from "../BaremTable";
 import AmountTable from "../AmountTable";
 import ShippingInfo from "../ShippingInfo";
 import TotalPrice from "../TotalPrice/TotalPrice";
 import AddBasket from "../AddBasket";
+import variantMap from "@/style/variantMap";
 
-const CalculationTable = ({ data, variantMap }) => {
+const CalculationTable = ({ data, selectedVariantId }) => {
   const [quantity, setQuantity] = useState();
   const [totalPrice, setTotalPrice] = useState();
-  const [productId, setProductId] = useState();
+  const [basketInfo, setBasketInfo] = useState({});
+  const [basketButtonDisabled, setBasketButtonDisabled] = useState(true);
 
   const findPrice = (quantity, baremList) => {
-    for (const { minimumQuantity, maximumQuantity, price } of baremList) {
+    for (const barem of baremList) {
+      const { minimumQuantity, maximumQuantity, price } = barem;
       if (quantity >= minimumQuantity && quantity <= maximumQuantity) {
-        return price;
+        return { price, usedBarem: barem };
       }
     }
 
@@ -22,17 +24,27 @@ const CalculationTable = ({ data, variantMap }) => {
   };
 
   const calculateTotalPrice = (quantity, baremList) => {
-    const price = findPrice(quantity, baremList);
-    if (price !== null) {
-      return quantity * price;
+    const result = findPrice(quantity, baremList);
+    if (result !== null) {
+      const { price, usedBarem } = result;
+      return { totalPrice: quantity * price, usedBarem };
     }
     return null;
   };
 
-  const price = calculateTotalPrice(quantity, data.baremList)?.toFixed(2);
-
   useEffect(() => {
-    setTotalPrice(price);
+    const result = calculateTotalPrice(quantity, data?.baremList);
+    if (result !== null) {
+      const { totalPrice, usedBarem } = result;
+      setTotalPrice(totalPrice.toFixed(2));
+      setBasketInfo({
+        "Ürün id": selectedVariantId,
+        "Kullanılan Barem": usedBarem,
+      });
+      setBasketButtonDisabled(false);
+    } else {
+      setBasketButtonDisabled(true);
+    }
   }, [quantity]);
   return (
     <>
@@ -49,7 +61,11 @@ const CalculationTable = ({ data, variantMap }) => {
       </div>
       <TotalPrice totalPrice={totalPrice} />
       <ShippingInfo />
-      <AddBasket variant={variantMap.basketButton} />
+      <AddBasket
+        variant={variantMap.basketButton}
+        basketInfo={basketInfo}
+        basketButtonDisabled={basketButtonDisabled}
+      />
     </>
   );
 };

@@ -3,17 +3,17 @@ const Button = ({
   item,
   url,
   variant,
-  handler,
   quantity,
   isLast,
-  colorSelector,
-  sizeSelector,
+  currentColor,
+  currentSize,
   redirectionClick,
   isSelected,
+  basketButtonDisabled,
 }) => {
   const isDisabled =
-    (colorSelector === "siyah" && (item === "M" || item === "XL")) ||
-    ((sizeSelector === "m" || sizeSelector === "xl") && item === "Siyah");
+    (currentColor === "siyah" && (item === "M" || item === "XL")) ||
+    ((currentSize === "m" || currentSize === "xl") && item === "Siyah");
 
   const buttonClass = `${variant} ${
     quantity >= item?.minimumQuantity && quantity <= item?.maximumQuantity
@@ -28,11 +28,10 @@ const Button = ({
       }`}
       onClick={() => {
         redirectionClick(url);
-        if (tableTitle !== "Toptan Fiyat" && handler) {
-          handler(item);
-        }
       }}
-      disabled={isDisabled || tableTitle === "Toptan Fiyat"}
+      disabled={
+        isDisabled || tableTitle === "Toptan Fiyat" || basketButtonDisabled
+      }
     >
       {tableTitle !== "Toptan Fiyat"
         ? `${item}`

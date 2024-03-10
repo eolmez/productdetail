@@ -6,11 +6,10 @@ const DataTable = ({
   tableTitle,
   data,
   variant,
-  handler,
   isInput,
   quantity,
-  colorSelector,
-  sizeSelector,
+  currentColor,
+  currentSize,
   isTotal,
   errorMessage,
   handleInputChange,
@@ -18,15 +17,14 @@ const DataTable = ({
   selectedAttributes,
 }) => {
   const params = useParams();
-  const getUrl = (item) => {
-    if (tableTitle === "Renk") {
-      return `/${item}/${params?.size}`;
-    }
-    if (tableTitle === "Beden") {
-      return `/${params?.color}/${item}`;
-    }
-    return `/${item}`;
+  const newUrl = (item) => {
+    const urlParams = {
+      Renk: params?.size ? `/${item}/${params?.size}` : `/${item}`,
+      Beden: params?.color ? `/${item}` : `/${item}/${params?.color}`,
+    };
+    return urlParams[tableTitle];
   };
+
   const redirectionClick = (url) => {
     window.location.href = url;
   };
@@ -56,27 +54,29 @@ const DataTable = ({
               handleInputChange={handleInputChange}
             />
           ) : (
-            data?.map((item, index) => (
-              <Button
-                key={index}
-                tableTitle={tableTitle}
-                item={item}
-                url={
-                  typeof item === "string" &&
-                  getUrl(`${item.toLowerCase()}-${tableTitle?.toLowerCase()}`)
-                }
-                variant={variant}
-                handler={handler}
-                quantity={quantity}
-                isLast={index === data.length - 1}
-                colorSelector={colorSelector}
-                sizeSelector={sizeSelector}
-                redirectionClick={redirectionClick}
-                isSelected={
-                  typeof item === "string" && selectedAttributes.includes(item)
-                }
-              />
-            ))
+            data?.map((item, index) => {
+              return (
+                <Button
+                  key={index}
+                  tableTitle={tableTitle}
+                  item={item}
+                  url={
+                    typeof item === "string" &&
+                    newUrl(`${item.toLowerCase()}-${tableTitle?.toLowerCase()}`)
+                  }
+                  variant={variant}
+                  quantity={quantity}
+                  isLast={index === data.length - 1}
+                  currentColor={currentColor}
+                  currentSize={currentSize}
+                  redirectionClick={redirectionClick}
+                  isSelected={
+                    typeof item === "string" &&
+                    selectedAttributes.includes(item)
+                  }
+                />
+              );
+            })
           )
         ) : (
           <div className="flex flex-col ">

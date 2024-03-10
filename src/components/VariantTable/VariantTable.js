@@ -1,35 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import React from "react";
 import ColorTable from "../ColorTable";
 import SizeTable from "../SizeTable";
+import variantMap from "@/style/variantMap";
 
-const VariantTable = ({ data, variantMap, selectedVariant }) => {
-  const { color, size } = useParams();
-  const colorSplited = color?.split("-")[0];
-  const sizeSplited = size?.split("-")[0];
-  const [colorSelector, setColorSelector] = useState(colorSplited);
-  const [sizeSelector, setSizeSelector] = useState(sizeSplited);
-  const [selectedAttributes, setSelectedAttributes] = useState([]);
-  useEffect(() => {
-    const attributeValues = selectedVariant.attributes.map(
-      (attribute) => attribute.value
-    );
-    setSelectedAttributes(attributeValues);
-  }, []);
+const VariantTable = ({ data, selectedVariant }) => {
+  const selectedAttributes = selectedVariant.attributes.map(
+    (attribute) => attribute.value
+  );
+  const currentColor = selectedVariant.attributes
+    .find((attr) => attr.name === "Renk")
+    .value.toLowerCase();
+  const currentSize = selectedVariant.attributes
+    .find((attr) => attr.name === "Beden")
+    .value.toLowerCase();
   return (
     <>
       <ColorTable
         data={data}
         variant={variantMap.tableButton}
-        sizeSelector={sizeSelector}
-        setColorSelector={setColorSelector}
+        currentSize={currentSize} //Değişken ismi selectedSize
         selectedAttributes={selectedAttributes}
       />
       <SizeTable
         data={data}
         variant={variantMap.tableButton}
-        colorSelector={colorSelector}
-        setSizeSelector={setSizeSelector}
+        currentColor={currentColor} //Değişken ismi selectedColor
         selectedAttributes={selectedAttributes}
       />
     </>
