@@ -10,20 +10,22 @@ const Button = ({
   basketButtonDisabled,
   enabledVariant,
 }) => {
-  const buttonClass = `${variant} ${
-    quantity >= item?.minimumQuantity && quantity <= item?.maximumQuantity
-      ? "bg-yellow-200"
-      : ""
-  } ${isLast ? (tableTitle === "Toptan Fiyat" ? "border-none" : "") : ""}`;
-
   const isWholesale = tableTitle === "Toptan Fiyat";
+  const buttonClass = `${variant} ${
+    isWholesale
+      ? quantity >= item?.minimumQuantity && quantity <= item?.maximumQuantity
+        ? "bg-yellow-200"
+        : ""
+      : ""
+  } ${isLast ? (isWholesale ? "border-none" : "") : ""}
+  ${
+    isSelected &&
+    "flex justify-center items-center border-2 border-black px-2 mx-1 w-20 lg:w-28 h-12 rounded"
+  }`;
 
   return (
     <button
-      className={`${buttonClass} ${
-        isSelected &&
-        "flex justify-center items-center border-2 border-black px-2 mx-1 w-20 lg:w-28 h-12 rounded"
-      }`}
+      className={buttonClass}
       onClick={() => {
         redirectToUrl(url);
       }}
