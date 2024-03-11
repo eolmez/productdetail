@@ -1,4 +1,4 @@
-import getData from "@/api/getData";
+import getData from "@/app/api/getData";
 import ProductPage from "@/components/ProductPage";
 
 export default async function Page({ params }) {

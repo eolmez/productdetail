@@ -1,5 +1,5 @@
 import ProductPage from "@/components/ProductPage";
-import getData from "../api/getData";
+import getData from "./api/getData";
 
 export default async function Page() {
   const data = await getData();
