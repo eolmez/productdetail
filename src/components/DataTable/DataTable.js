@@ -8,19 +8,18 @@ const DataTable = ({
   variant,
   isInput,
   quantity,
-  currentColor,
-  currentSize,
   isTotal,
   errorMessage,
   handleInputChange,
   totalPrice,
   selectedAttributes,
+  enabledVariant,
 }) => {
   const params = useParams();
   const newUrl = (item) => {
     const urlParams = {
       Renk: params?.size ? `/${item}/${params?.size}` : `/${item}`,
-      Beden: `/${currentColor}-renk/${item}`,
+      Beden: params?.color ? `/${params?.color}/${item}` : `/${item}`,
     };
     return urlParams[tableTitle];
   };
@@ -67,13 +66,12 @@ const DataTable = ({
                   variant={variant}
                   quantity={quantity}
                   isLast={index === data.length - 1}
-                  currentColor={currentColor}
-                  currentSize={currentSize}
                   redirectionClick={redirectionClick}
                   isSelected={
                     typeof item === "string" &&
                     selectedAttributes.includes(item)
                   }
+                  enabledVariant={!enabledVariant?.includes(item)}
                 />
               );
             })

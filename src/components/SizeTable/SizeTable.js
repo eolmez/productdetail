@@ -1,7 +1,7 @@
 import React from "react";
 import DataTable from "../DataTable";
 
-const SizeTable = ({ data, variant, currentColor, selectedAttributes }) => {
+const SizeTable = ({ data, variant, selectedAttributes, enabledVariant }) => {
   const sizeValues =
     data?.selectableAttributes.find((attribute) => attribute?.name === "Beden")
       ?.values || [];
@@ -12,8 +12,8 @@ const SizeTable = ({ data, variant, currentColor, selectedAttributes }) => {
         tableTitle={"Beden"}
         data={sizeValues}
         variant={variant}
-        currentColor={currentColor}
         selectedAttributes={selectedAttributes}
+        enabledVariant={enabledVariant}
       />
     </>
   );

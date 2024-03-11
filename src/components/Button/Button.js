@@ -5,16 +5,11 @@ const Button = ({
   variant,
   quantity,
   isLast,
-  currentColor,
-  currentSize,
   redirectionClick,
   isSelected,
   basketButtonDisabled,
+  enabledVariant,
 }) => {
-  const isDisabled =
-    (currentColor === "siyah" && (item === "M" || item === "XL")) ||
-    ((currentSize === "m" || currentSize === "xl") && item === "Siyah");
-
   const buttonClass = `${variant} ${
     quantity >= item?.minimumQuantity && quantity <= item?.maximumQuantity
       ? "bg-yellow-200"
@@ -32,7 +27,7 @@ const Button = ({
       onClick={() => {
         redirectionClick(url);
       }}
-      disabled={isDisabled || isWholesale || basketButtonDisabled}
+      disabled={enabledVariant || isWholesale || basketButtonDisabled}
     >
       {tableTitle !== "Toptan Fiyat"
         ? `${item}`
