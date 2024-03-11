@@ -5,7 +5,7 @@ const Button = ({
   variant,
   quantity,
   isLast,
-  redirectionClick,
+  redirectToUrl,
   isSelected,
   basketButtonDisabled,
   enabledVariant,
@@ -25,7 +25,7 @@ const Button = ({
         "flex justify-center items-center border-2 border-black px-2 mx-1 w-20 lg:w-28 h-12 rounded"
       }`}
       onClick={() => {
-        redirectionClick(url);
+        redirectToUrl(url);
       }}
       disabled={enabledVariant || isWholesale || basketButtonDisabled}
     >

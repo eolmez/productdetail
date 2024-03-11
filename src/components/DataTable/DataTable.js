@@ -24,7 +24,7 @@ const DataTable = ({
     return urlParams[tableTitle];
   };
 
-  const redirectionClick = (url) => {
+  const redirectToUrl = (url) => {
     window.location.href = url;
   };
   return (
@@ -66,7 +66,7 @@ const DataTable = ({
                   variant={variant}
                   quantity={quantity}
                   isLast={index === data.length - 1}
-                  redirectionClick={redirectionClick}
+                  redirectToUrl={redirectToUrl}
                   isSelected={
                     typeof item === "string" &&
                     selectedAttributes.includes(item)
