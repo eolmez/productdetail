@@ -1,9 +1,9 @@
 import DataTable from "../DataTable";
 
 const ColorTable = ({ data, variant, selectedAttributes, enabledVariant }) => {
-  const colorValues =
-    data?.selectableAttributes?.find((attribute) => attribute?.name === "Renk")
-      ?.values || [];
+  const colorValues = data?.selectableAttributes?.find(
+    (attribute) => attribute?.name === "Renk"
+  )?.values;
   return (
     <>
       <DataTable

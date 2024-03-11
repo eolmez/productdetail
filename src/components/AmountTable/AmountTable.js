@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "../DataTable";
 
-const AmountTable = ({ variant, setQuantity }) => {
+const AmountTable = ({ variant, setQuantity, quantity }) => {
   const [errorMessage, setErrorMessage] = useState("");
+  useEffect(() => {
+    const savedQuantity = localStorage.getItem("inputValue");
+    if (savedQuantity) {
+      setQuantity(savedQuantity);
+    }
+  }, []);
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     const isValid = checkValidity(inputValue);
 
     if (isValid) {
       setQuantity(inputValue);
+      localStorage.setItem("inputValue", inputValue);
       setErrorMessage("");
     } else {
       if (inputValue) {
@@ -22,12 +29,17 @@ const AmountTable = ({ variant, setQuantity }) => {
     const intValue = parseInt(value);
     return intValue >= 120 && intValue <= 1000;
   };
+
+  useEffect(() => {
+    localStorage.setItem("quantity", quantity);
+  }, [quantity]);
   return (
     <>
       <DataTable
         tableTitle={"Adet"}
         variant={variant}
         isInput={true}
+        quantity={quantity}
         errorMessage={errorMessage}
         handleInputChange={handleInputChange}
       />

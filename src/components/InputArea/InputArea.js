@@ -1,4 +1,4 @@
-const InputArea = ({ variant, errorMessage, handleInputChange }) => {
+const InputArea = ({ variant, errorMessage, quantity, handleInputChange }) => {
   return (
     <div className="flex justify-between items-center w-full">
       <div className="flex items-center">
@@ -9,6 +9,7 @@ const InputArea = ({ variant, errorMessage, handleInputChange }) => {
           }`}
           type="number"
           inputMode="none"
+          value={quantity !== "" ? quantity : ""}
           onChange={handleInputChange}
         />
         <span className="text-xs lg:text-base">Adet</span>

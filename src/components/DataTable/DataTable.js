@@ -49,6 +49,7 @@ const DataTable = ({
           isInput ? (
             <InputArea
               variant={variant}
+              quantity={quantity}
               errorMessage={errorMessage}
               handleInputChange={handleInputChange}
             />

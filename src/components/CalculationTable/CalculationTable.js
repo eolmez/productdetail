@@ -7,7 +7,7 @@ import AddBasket from "../AddBasket";
 import variantMap from "@/style/variantMap";
 
 const CalculationTable = ({ data, selectedVariantId }) => {
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState("");
   const [totalPrice, setTotalPrice] = useState();
   const [basketInfo, setBasketInfo] = useState({});
   const [basketButtonDisabled, setBasketButtonDisabled] = useState(true);
@@ -55,6 +55,7 @@ const CalculationTable = ({ data, selectedVariantId }) => {
         />
         <AmountTable
           variant={variantMap?.inputButton}
+          quantity={quantity}
           setQuantity={setQuantity}
         />
       </div>
